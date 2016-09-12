@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.5)
+project(mycuda)
+INCLUDE(C:/Users/lichao15/Desktop/opencv-2.4.13/cmake/FindCUDA.cmake)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(SOURCE_FILES main.cpp)
+set(INC_DIR F:/software/opencv/build/include)
+set(LINK_DIR F:/software/opencv/build/mingw/lib)
+include_directories(${INC_DIR})
+link_directories(${LINK_DIR})
+#target_link_libraries(opencv_core2413.dll.a)
+cuda_add_executable(mycuda ${SOURCE_FILES})
