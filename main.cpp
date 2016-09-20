@@ -2,15 +2,32 @@
 #include <vector>
 #include <io.h>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 void getFiles(const string&,vector<string>&);
 int main() {
-    string prefix="E:\\data\\bot\\image\\";
+    string prefix="E:\\data\\bot\\train\\";
     vector<string> imgnames;
     getFiles(prefix,imgnames);
-    cout<<imgnames.size()<<endl;
+    ofstream outf("E:\\data\\bot\\t.txt",ios::out);
+    for (int i = 0; i < imgnames.size(); ++i) {
+        outf<<imgnames[i]<<endl;
+    }
+    outf.close();
+    ifstream inf("E:\\data\\bot\\t.txt",ios::in);
+    vector<pair<string,string>> path_name;
+    string line;
+    size_t pos;
+    while (getline(inf,line)){
+        pos=line.find_last_of("\\");
+        path_name.push_back(make_pair(line.substr(0,pos),line.substr(pos+1)));
+    }
+    vector<pair<string,string>>::iterator iter;
+    for (iter=path_name.begin();iter!=path_name.end();iter++){
+        cout<<(*iter).first<<"******"<<(*iter).second<<endl;
+    }
 }
 
 void getFiles(const string& path,vector<string>& files){
